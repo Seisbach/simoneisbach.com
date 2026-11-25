@@ -212,6 +212,51 @@
   .list li span:last-child { color: var(--muted); text-align: right; }
   .list + .list { margin-top: 20px; }
 
+  /* speaking mosaic */
+  .mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 300px; gap: 20px; }
+  figure.tile img { position: absolute; inset: 0; }
+  .tile { position: relative; border-radius: 24px; overflow: hidden; margin: 0; background: var(--surface); border: 1px solid var(--line); }
+  .tile.tall { grid-row: span 2; }
+  .tile.wide { grid-column: span 2; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+  .tile:hover img { transform: scale(1.04); }
+  .tile figcaption {
+    position: absolute; inset: auto 0 0 0; padding: 72px 24px 22px; color: #fff;
+    background: linear-gradient(to top, rgba(10,16,22,.88), rgba(10,16,22,.5) 55%, transparent);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .tile .where { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--spark); }
+  .tile figcaption .where { color: #ffb48f; }
+  .tile strong { font-family: Fraunces, serif; font-weight: 500; font-size: 22px; line-height: 1.2; }
+  .tile .note { font-size: 14px; opacity: .8; }
+  .tile.media { padding: 28px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: transform .3s, box-shadow .3s; }
+  .tile.media:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .media-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+  .tile.media .where { margin-top: auto; }
+  .media-icon svg { width: 22px; height: 22px; }
+  .tile.media strong { margin-top: 20px; }
+  .tile .go { color: var(--accent); font-weight: 500; font-size: 15px; margin-top: 6px; }
+  .tile.invite { background: var(--quote-bg); color: #f6f3ee; border-color: transparent; }
+  .tile.invite .media-icon { background: rgba(255,255,255,.1); color: #ffb48f; }
+  .tile.invite .go { color: #ffb48f; }
+  .tile.invite .where { color: #ffb48f; }
+
+  /* stories */
+  .stories { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+  .story { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; }
+  .story-img { aspect-ratio: 16 / 10; overflow: hidden; }
+  .story-img.light { background: #fff; }
+  .story-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+  .story-img.light img { object-fit: contain; padding: 12px 12px 0; }
+  .story:hover .story-img img { transform: scale(1.03); }
+  .story-body { padding: 28px 32px 32px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .story .where { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--spark); }
+  .story h3 { font-size: 26px; }
+  .story p { color: var(--muted); font-size: 15.5px; }
+  .textlinks { display: flex; gap: 20px; flex-wrap: wrap; margin-top: auto; }
+  .textlink { color: var(--accent); font-weight: 500; font-size: 15px; text-decoration: none; margin-top: auto; }
+  .textlink:hover { text-decoration: underline; }
+
   /* contact */
   .contact { text-align: center; padding: 128px 0 96px; }
   .contact h2 { font-size: clamp(38px, 6vw, 72px); font-weight: 300; margin-bottom: 24px; }
@@ -244,7 +289,11 @@
     .about { grid-template-columns: 1fr; gap: 28px; }
     .about-title { position: static; }
     .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
-    .cards, .split { grid-template-columns: 1fr; }
+    .cards, .split, .stories { grid-template-columns: 1fr; }
+    .mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
+    figure.tile { aspect-ratio: 16/10; }
+    .tile.tall { grid-row: span 1; aspect-ratio: 3/4; }
+    .tile.wide { grid-column: span 2; }
     .nav-links a { display: none; }
     section.block { padding: 80px 0; }
   }
@@ -253,6 +302,11 @@
     .tl-item { grid-template-columns: 1fr; gap: 6px; }
     .card, .paper, .list { padding: 28px; }
     .card.wide { grid-template-columns: 1fr; gap: 0; }
+    .mosaic { grid-template-columns: 1fr; }
+    .tile.wide { grid-column: span 1; aspect-ratio: 4/3; }
+    .tile.tall { aspect-ratio: 4/5; }
+    .tile.media { min-height: 220px; }
+    .story-body { padding: 24px; }
     .card.wide .icon { margin-bottom: 24px; }
     .stat .word { font-size: 24px; }
     .prose p:first-child { font-size: 21px; }
@@ -270,6 +324,7 @@
     <div class="nav-links">
       <a href="#about"><span lang="en">About</span><span lang="de">Über mich</span></a>
       <a href="#focus"><span lang="en">Focus</span><span lang="de">Fokus</span></a>
+      <a href="#speaking"><span lang="en">Speaking</span><span lang="de">Vorträge</span></a>
       <a href="#journey"><span lang="en">Journey</span><span lang="de">Werdegang</span></a>
       <a href="#research"><span lang="en">Research</span><span lang="de">Forschung</span></a>
       <a href="#contact"><span lang="en">Contact</span><span lang="de">Kontakt</span></a>
@@ -438,6 +493,68 @@
   </div>
 </section>
 
+<section class="block" id="speaking">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker"><span lang="en">On stage</span><span lang="de">Auf der Bühne</span></span>
+        <h2>
+          <span lang="en">Sharing what <em>works</em>.</span>
+          <span lang="de">Teilen, was <em>funktioniert</em>.</span>
+        </h2>
+      </div>
+      <p>
+        <span lang="en">From festival stages to closed-door sessions: I like to talk openly about what it really takes to bring AI into large organisations.</span>
+        <span lang="de">Von der Festivalbühne bis zur geschlossenen Runde: Ich spreche gern offen darüber, was es wirklich braucht, um KI in große Organisationen zu bringen.</span>
+      </p>
+    </div>
+    <div class="mosaic">
+      <figure class="tile tall reveal">
+        <img src="assets/talk-data-unplugged.jpg" alt="Simon Eisbach speaking on stage at the Data Unplugged festival" loading="lazy" width="1086" height="1448">
+        <figcaption>
+          <span class="where">Data Unplugged · Münster</span>
+          <strong><span lang="en">Scaling AI in the enterprise</span><span lang="de">KI im Konzern skalieren</span></strong>
+          <span class="note"><span lang="en">Talk at Germany's largest AI festival</span><span lang="de">Vortrag auf Deutschlands größtem KI-Festival</span></span>
+        </figcaption>
+      </figure>
+      <figure class="tile wide reveal">
+        <img src="assets/talk-camundacon.jpg" alt="Panel discussion at CamundaCon 2026 in Amsterdam" loading="lazy" width="1520" height="853">
+        <figcaption>
+          <span class="where">CamundaCon 2026 · Amsterdam</span>
+          <strong><span lang="en">Panel: the future of agentic orchestration</span><span lang="de">Panel: die Zukunft agentischer Orchestrierung</span></strong>
+          <span class="note"><span lang="en">Judging by the faces, the joke landed.</span><span lang="de">Den Gesichtern nach ist der Witz gelandet.</span></span>
+        </figcaption>
+      </figure>
+      <figure class="tile wide reveal">
+        <img src="assets/talk-viadee-haie.jpg" alt="Simon Eisbach presenting to AI leaders in the Kölner Haie locker room" loading="lazy" width="1600" height="1205">
+        <figcaption>
+          <span class="where">viadee · <span lang="en">Kölner Haie locker room</span><span lang="de">Kabine der Kölner Haie</span></span>
+          <strong><span lang="en">Closed-door session for AI leaders</span><span lang="de">Geschlossene Runde für KI-Verantwortliche</span></strong>
+          <span class="note"><span lang="en">With AI leads from major German industrial and commercial companies</span><span lang="de">Mit KI-Verantwortlichen großer deutscher Industrie- und Handelsunternehmen</span></span>
+        </figcaption>
+      </figure>
+      <a class="tile media reveal" href="https://navigate-kongress.de/programm/implementierung-eines-large-language-model-access-layer/" target="_blank" rel="noopener">
+        <div class="media-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="where">Navigate · viadee</span>
+        <strong><span lang="en">Implementing a Large Language Model access layer</span><span lang="de">Implementierung eines Large Language Model Access Layer</span></strong>
+        <span class="go"><span lang="en">Watch the talk</span><span lang="de">Vortrag ansehen</span> ↗</span>
+      </a>
+      <a class="tile media reveal" href="https://frag-doch-mal-die-fincon.podigee.io/38-neue-episode" target="_blank" rel="noopener">
+        <div class="media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></div>
+        <span class="where">Podcast · Frag doch mal die Fincon</span>
+        <strong><span lang="en">AI in everyday insurance</span><span lang="de">KI im Versicherungsalltag</span></strong>
+        <span class="go"><span lang="en">Listen to the episode</span><span lang="de">Folge anhören</span> ↗</span>
+      </a>
+      <a class="tile media invite reveal" href="mailto:simon.eisbach@gmail.com">
+        <div class="media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+        <span class="where"><span lang="en">Your event</span><span lang="de">Dein Event</span></span>
+        <strong><span lang="en">Looking for a speaker on AI adoption?</span><span lang="de">Auf der Suche nach einem Speaker zu KI-Adoption?</span></strong>
+        <span class="go"><span lang="en">Get in touch</span><span lang="de">Schreib mir</span> →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="block" id="journey">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -467,8 +584,8 @@
           <h3><span lang="en">Lecturer, Continuing Education</span><span lang="de">Dozent, Weiterbildung</span></h3>
           <div class="tl-org">University of Münster</div>
           <p>
-            <span lang="en">Teaching professionals and executives the critical use of AI.</span>
-            <span lang="de">Ich lehre Fach- und Führungskräften den kritischen Umgang mit KI.</span>
+            <span lang="en">Teaching the part-time master's programme in psychology at the Professional School – and guest lectures on AI at the universities of Münster and Wuppertal.</span>
+            <span lang="de">Dozent im berufsbegleitenden Psychologie-Master der Professional School – und Gastvorträge zu KI an den Universitäten Münster und Wuppertal.</span>
           </p>
         </div>
       </div>
@@ -495,6 +612,35 @@
         </div>
       </div>
     </div>
+    <div class="stories">
+      <article class="story reveal">
+        <div class="story-img light"><img src="assets/applysia-founders.jpg" alt="The four Applysia founders" loading="lazy" width="1600" height="1108"></div>
+        <div class="story-body">
+          <span class="where">Applysia · 2018 – 2021</span>
+          <h3><span lang="en">Founding a start-up</span><span lang="de">Ein Start-up gründen</span></h3>
+          <p>
+            <span lang="en">Together with three co-founders – psychologists and a computer scientist – I built digital assessment software for personnel selection. I was responsible for marketing and operations and learned first-hand what it takes to bring a tech product to market.</span>
+            <span lang="de">Mit drei Mitgründern – Psychologen und einem Informatiker – habe ich digitale Assessment-Software für die Personalauswahl gebaut. Ich war für Marketing und Operatives zuständig und habe aus erster Hand gelernt, was es braucht, ein Tech-Produkt an den Markt zu bringen.</span>
+          </p>
+          <a class="textlink" href="https://www.saatkorn.com/applysia-in-der-hr-startup-serie/" target="_blank" rel="noopener"><span lang="en">Interview on saatkorn (German)</span><span lang="de">Interview bei saatkorn</span> ↗</a>
+        </div>
+      </article>
+      <article class="story reveal">
+        <div class="story-img"><img src="assets/hackathon-cubisite.jpg" alt="Participants celebrating at the WWU Hackathon 2022 at REACH Münster" loading="lazy" width="1600" height="1065"></div>
+        <div class="story-body">
+          <span class="where">WWU Hackathon 2022 · REACH Münster</span>
+          <h3><span lang="en">Cubisite – 2nd place</span><span lang="de">Cubisite – 2. Platz</span></h3>
+          <p>
+            <span lang="en">AI-supported website improvement: our team trained its own model to predict how users perceive a website's aesthetics and usability – and turned it into concrete suggestions for improvement.</span>
+            <span lang="de">KI-gestützte Website-Optimierung: Unser Team hat ein eigenes Modell trainiert, das vorhersagt, wie Nutzer:innen Ästhetik und Usability einer Website wahrnehmen – und daraus konkrete Verbesserungsvorschläge macht.</span>
+          </p>
+          <span class="textlinks">
+            <a class="textlink" href="https://www.wn.de/muenster/studierende-treten-beim-hackathon-an-2636214" target="_blank" rel="noopener">Westfälische Nachrichten ↗</a>
+            <a class="textlink" href="https://www.reach-euregio.de/news/wwuhackathon" target="_blank" rel="noopener">REACH ↗</a>
+          </span>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -502,12 +648,13 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <span class="kicker"><span lang="en">Research &amp; Speaking</span><span lang="de">Forschung &amp; Vorträge</span></span>
+        <span class="kicker"><span lang="en">Research &amp; Teaching</span><span lang="de">Forschung &amp; Lehre</span></span>
         <h2>
           <span lang="en">Grounded in <em>evidence</em>.</span>
           <span lang="de">Fundiert in <em>Evidenz</em>.</span>
         </h2>
       </div>
+      <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=cmgQbXwAAAAJ&amp;hl=de" target="_blank" rel="noopener"><span lang="en">All publications on Google Scholar</span><span lang="de">Alle Publikationen auf Google Scholar</span> ↗</a>
     </div>
     <div class="split">
       <a class="paper reveal" href="https://doi.org/10.1016/j.chbah.2023.100015" target="_blank" rel="noopener">
@@ -516,18 +663,24 @@
         <div class="meta">Eisbach, S., Langer, M., &amp; Hertel, G.</div>
         <span class="arrow"><span lang="en">Read the paper</span><span lang="de">Zum Paper</span> ↗</span>
       </a>
-      <div class="list reveal">
-        <h4><span lang="en">On stage &amp; in the classroom</span><span lang="de">Auf der Bühne &amp; im Hörsaal</span></h4>
-        <p class="list-intro">
-          <span lang="en">I regularly speak at conferences and teach – about what makes AI adoption work, and what we know about people and AI.</span>
-          <span lang="de">Ich spreche regelmäßig auf Konferenzen und lehre – darüber, was KI-Adoption gelingen lässt, und was wir über Menschen und KI wissen.</span>
-        </p>
-        <ul>
-          <li><span><span lang="en">AI adoption &amp; change</span><span lang="de">KI-Adoption &amp; Change</span></span></li>
-          <li><span><span lang="en">Human–AI collaboration</span><span lang="de">Mensch-KI-Kollaboration</span></span></li>
-          <li><span><span lang="en">Responsible AI &amp; governance</span><span lang="de">Verantwortungsvolle KI &amp; Governance</span></span></li>
-          <li><span><span lang="en">Agentic AI &amp; automation</span><span lang="de">Agentische KI &amp; Automatisierung</span></span></li>
-        </ul>
+      <div>
+        <div class="list reveal">
+          <h4><span lang="en">Also published</span><span lang="de">Außerdem veröffentlicht</span></h4>
+          <ul>
+            <li><span>Künstliche Intelligenz im Strafverfahren am Beispiel von Kriminalprognosen</span><span>ZIS · 2022</span></li>
+          </ul>
+        </div>
+        <div class="list reveal">
+          <h4><span lang="en">In the lecture hall</span><span lang="de">Im Hörsaal</span></h4>
+          <p class="list-intro">
+            <span lang="en">Teaching keeps me honest: if I can't explain it to a room full of critical students, I haven't understood it yet.</span>
+            <span lang="de">Lehre hält mich ehrlich: Wenn ich es einem Raum voller kritischer Studierender nicht erklären kann, habe ich es noch nicht verstanden.</span>
+          </p>
+          <ul>
+            <li><span><span lang="en">Lecturer, part-time master's in psychology</span><span lang="de">Dozent im berufsbegleitenden Psychologie-Master</span></span><span>Professional School Münster</span></li>
+            <li><span><span lang="en">Guest lectures on AI</span><span lang="de">Gastvorträge zu KI</span></span><span><span lang="en">Univ. of Münster · Univ. of Wuppertal</span><span lang="de">Uni Münster · Uni Wuppertal</span></span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
